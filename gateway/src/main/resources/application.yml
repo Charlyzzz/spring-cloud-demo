@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: coffee
+          uri: lb://coffee
+          predicates:
+            - Path=/coffee/**
+  zipkin:
+    base-url: http://localhost:9411/
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+
+spring.sleuth:
+  traceId128: true
+  sampler.probability: 1.0
+
